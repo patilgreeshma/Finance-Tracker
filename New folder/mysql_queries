@@ -1,0 +1,100 @@
+
+
+-- debts Table
+CREATE TABLE debts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255),
+    amount DECIMAL(15, 2),
+    interest DECIMAL(5, 2),
+    due_date DATE,
+    status VARCHAR(50),
+    user_id INT
+);
+
+-- expenses Table
+CREATE TABLE expenses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE,
+    category VARCHAR(255),
+    amount DECIMAL(15, 2),
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INT
+);
+
+-- incomes Table
+CREATE TABLE incomes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE,
+    source VARCHAR(255),
+    amount DECIMAL(15, 2),
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INT
+);
+
+-- investments Table
+CREATE TABLE investments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    name VARCHAR(255),
+    type_id INT,
+    purchase_date DATE,
+    amount DECIMAL(15, 2),
+    expected_return DECIMAL(5, 2),
+    current_value DECIMAL(15, 2),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- investment_types Table
+CREATE TABLE investment_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type_name VARCHAR(255)
+);
+-- Insert default investment types
+INSERT INTO investment_types (type_name) VALUES 
+('ETF'),
+('Stock'),
+('Retirement'),
+('Bond'),
+('Real Estate'),
+('Cryptocurrency');
+
+-- news_articles Table
+CREATE TABLE news_articles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    source VARCHAR(255),
+    url VARCHAR(255),
+    published_at DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- savings_goals Table
+CREATE TABLE savings_goals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    goal_name VARCHAR(255),
+    target_amount DECIMAL(15, 2),
+    current_amount DECIMAL(15, 2),
+    due_date DATE,
+    created_date DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INT
+);
+
+-- users Table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE,
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    phone VARCHAR(15),
+    profile_pic VARCHAR(255),
+    joined_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reset_token VARCHAR(255),
+    reset_expires DATETIME,
+    role VARCHAR(50),
+    name VARCHAR(255)
+);
